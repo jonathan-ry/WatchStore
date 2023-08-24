@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.DTO
 {
@@ -40,6 +41,7 @@ namespace API.DTO
         [Required]
         public string StrapMaterial { get; set; }
 
+        [JsonIgnore]
         public IFormFile Photo { get; set; }
     }
 }

@@ -14,6 +14,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 });
 
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IWatchRepository, WatchRepository>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
