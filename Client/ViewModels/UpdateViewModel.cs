@@ -2,8 +2,9 @@
 
 namespace Client.ViewModels
 {
-    public class WatchViewModel
+    public class UpdateViewModel
     {
+        [Required]
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = String.Empty;
@@ -46,7 +47,8 @@ namespace Client.ViewModels
         public string? CaseMaterial { get; set; }
         [Required]
         public string? StrapMaterial { get; set; }
-
         public string? PhotoUri { get; set; }
+
+        public IFormFile? Photo { get; set; }
     }
 }

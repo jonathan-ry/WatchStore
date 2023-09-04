@@ -63,7 +63,7 @@ namespace API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async void UpdateWatch(Watch watchUpdate)
+        public async Task UpdateWatch(Watch watchUpdate)
         {
             var watch = await _context.Watches.SingleOrDefaultAsync(x => x.Id == watchUpdate.Id);
             if (watch != null) 
@@ -83,6 +83,7 @@ namespace API.Data
                 watch.Height = watchUpdate.Height;
                 watch.CaseMaterial = watchUpdate.CaseMaterial;
                 watch.StrapMaterial = watchUpdate.StrapMaterial;
+                watch.PhotoUri = watchUpdate.PhotoUri;
 
             }
         }

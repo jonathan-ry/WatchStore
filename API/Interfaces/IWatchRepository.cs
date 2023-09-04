@@ -6,7 +6,7 @@ namespace API.Interfaces
     public interface IWatchRepository
     {
         //Update
-        void UpdateWatch(Watch watch);
+        Task UpdateWatch(Watch watch);
 
         //Get
         Task<IEnumerable<Watch>> GetWatchesAsync();

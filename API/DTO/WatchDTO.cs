@@ -40,8 +40,6 @@ namespace API.DTO
         public string CaseMaterial { get; set; }
         [Required]
         public string StrapMaterial { get; set; }
-
-        [JsonIgnore]
-        public IFormFile Photo { get; set; }
+        public string PhotoUri { get; set; }
     }
 }

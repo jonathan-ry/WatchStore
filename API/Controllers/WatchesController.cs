@@ -46,12 +46,6 @@ namespace API.Controllers
                 return BadRequest("Item Number already exist");
             }
 
-            if(watch.Photo != null)
-            {
-                BlobResponseDTO blobResult = await _fileService.UploadAsync(watch.Photo);
-                newWatch.PhotoUri = blobResult.Blob.Uri;
-            }
-
             await _watchRepository.AddItemAsync(newWatch);
             
             if(await _watchRepository.SaveAllAsync()) return Ok(newWatch);
@@ -82,7 +76,7 @@ namespace API.Controllers
         [HttpPut("update")]
         public async Task<ActionResult<Watch>> UpdateWatch(Watch watch)
         {
-             _watchRepository.UpdateWatch(watch);
+            await _watchRepository.UpdateWatch(watch);
             if (await _watchRepository.SaveAllAsync()) return Ok(watch);
 
             return BadRequest("Problem updating watch");
