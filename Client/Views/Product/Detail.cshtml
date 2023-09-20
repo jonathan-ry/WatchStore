@@ -1,0 +1,89 @@
+﻿@model WatchViewModel
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="@Model.PhotoUri" class="img-fluid" alt="@Model.Name" width="400px">
+        </div>
+        <div class="col-md-7">
+            <h2>@Model.Name</h2>
+            <h6>@Model.ItemNumber</h6>
+            <p class="mt-4 mb-4">@Model.FullDescription</p>
+            @{
+                // Get the price from your ASP.NET model (replace Model.Price with your actual property)
+                double price = @Model.Price;
+
+                // Format the price with two decimal places, a comma as a thousands separator, and no currency symbol
+                string formattedPrice = price.ToString("N2", new System.Globalization.CultureInfo("en-US"));
+            }
+
+            <h5>฿@formattedPrice</h5>
+            <!-- Add more product details here -->
+
+        </div>
+    </div>
+
+    <div class="row mb-4 border-top">
+        <h3 class="mt-4 mb-4"><span id="title-span">KEY</span> FEATURES</h3>
+        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="/img/details5.png" class="img-fluid" alt="@Model.CaseMaterial" width="100px">
+            <h5>Case Material</h5>
+            <p>@Model.CaseMaterial</p>
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="/img/details3.png" class="img-fluid" alt="@Model.Weight" width="100px">
+            <h5>Weight</h5>
+            <p>@Model.Weight g.</p>
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="/img/details1.png" class="img-fluid" alt="@Model.Thickness" width="100px">
+            <h5>Thickness</h5>
+            <p>@Model.Thickness mm</p>
+        </div>
+        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+            <img src="/img/details6.png" class="img-fluid" alt="@Model.Diameter" width="100px">
+            <h5>Jewel</h5>
+            <p>@Model.Diameter mm</p>
+        </div>
+    </div>
+
+    <div class="row mb-4 border-top">
+        <h3 class="mt-4 mb-4">TECHNICAL DATA</h3>
+        <div class="col-4">
+            <h5 class="mb-4">Movement</h5>
+            <h6>Caliber</h6>
+            <p>@Model.Caliber</p>
+            <h6>Movement</h6>
+            <p>@Model.Movement</p>
+            <h6>Chronograph</h6>
+            <p>@Model.Chronograph</p>
+            <h6>Jewel</h6>
+            <p>@Model.Jewel</p>
+        </div>
+
+        <div class="col-4">
+            <h5 class="mb-4">Dimensions</h5>
+            <h6>Weight</h6>
+            <p>@Model.Weight g.</p>
+            <h6>Diameter</h6>
+            <p>@Model.Diameter mm</p>
+            <h6>Thickness</h6>
+            <p>@Model.Thickness mm</p>
+            <h6>Height</h6>
+            <p>@Model.Height mm</p>
+        </div>
+
+        <div class="col-4">
+            <h5 class="mb-4">Materials</h5>
+            <h6>Case Material</h6>
+            <p>@Model.CaseMaterial</p>
+            <h6>Strap Material</h6>
+            <p>@Model.StrapMaterial</p>
+        </div>
+       
+    </div>
+
+    <div class="border-top">
+        <a class="mt-2" href="@Url.Action("Index", "Product")">Back to List</a>
+    </div>
+</div>

@@ -11,6 +11,8 @@
             </div>
             <div class="modal-body">
                 <form id="updateForm" asp-controller="Dashboard" asp-action="UpdateProduct"  method="post" enctype="multipart/form-data">
+                
+                    @Html.HiddenFor(model => model.Id)
                     <div class="row">
                         <div class="col-4">
                             <h4 class="mt-4 mb-2">Photo Upload</h4>
@@ -21,6 +23,7 @@
                                 }
                                 else
                                 {
+                                    @Html.HiddenFor(model => model.PhotoUri)
                                     <img id="upload-icon" src="@Model.PhotoUri" class="file-upload-icon" />
                                 }
                             </div>
@@ -31,21 +34,22 @@
                         <div class="col-8">
                             <h4 class="mt-4 mb-2">Product Info</h4>
                             <div class="form-group mb-2">
-                                <label asp-for="Name" class="control-label">Name</label>
+                                <label asp-for="Name" class="control-label required">Name</label>
                                 <input asp-for="Name" class="form-control" type="text" value="@Model.Name" placeholder="">
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-2">
-                                <label asp-for="ItemNumber" class="control-label">Item Number</label>
+                                <label asp-for="ItemNumber" class="control-label required">Item Number</label>
                                 <input asp-for="ItemNumber" class="form-control" type="text" value="@Model.ItemNumber" placeholder="">
                                 <span asp-validation-for="ItemNumber" class="text-danger"></span>
                             </div>
                             <div class="form-group mb-2">
-                                <label asp-for="Price" class="control-label">Price</label>
+                                <label asp-for="Price" class="control-label required">Price</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">฿</span>
                                     </div>
+                          
                                     <input asp-for="Price" class="form-control" type="number" value="@Model.Price" placeholder="0.00">
                                 </div>
 
@@ -58,12 +62,12 @@
 
                             <div class="row">
                                 <div class="form-group col-6 mb-2">
-                                    <label asp-for="Caliber" class="control-label">Caliber</label>
+                                    <label asp-for="Caliber" class="control-label required">Caliber</label>
                                     <input asp-for="Caliber" class="form-control" type="text" value="@Model.Caliber" placeholder="">
                                     <span asp-validation-for="Caliber" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6 mb-2">
-                                    <label asp-for="Movement" class="control-label">Movement Type</label>
+                                    <label asp-for="Movement" class="control-label required">Movement Type</label>
                                     <input asp-for="Movement" class="form-control" type="text" value="@Model.Movement" placeholder="">
                                     <span asp-validation-for="Movement" class="text-danger"></span>
                                 </div>
@@ -71,12 +75,12 @@
 
                             <div class="row">
                                 <div class="form-group col-6 mb-2">
-                                    <label asp-for="Chronograph" class="control-label">Chronograph</label>
+                                    <label asp-for="Chronograph" class="control-label required">Chronograph</label>
                                     <input asp-for="Chronograph" class="form-control" type="text" value="@Model.Chronograph" placeholder="">
                                     <span asp-validation-for="Chronograph" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6 mb-2">
-                                    <label asp-for="Jewel" class="control-label">Jewel</label>
+                                    <label asp-for="Jewel" class="control-label required">Jewel</label>
                                     <input asp-for="Jewel" class="form-control" type="number" value="@Model.Jewel" placeholder="Valid Range: (1 - 70)">
                                     <span asp-validation-for="Jewel" class="text-danger"></span>
                                 </div>
@@ -90,7 +94,7 @@
 
                     <div class="row">
                         <div class="form-group col-3 mb-2">
-                            <label asp-for="Weight" class="control-label">Weight</label>
+                            <label asp-for="Weight" class="control-label required">Weight</label>
                             <div class="input-group">
                                 <input asp-for="Weight" class="form-control" type="number" value="@Model.Weight" placeholder="Valid Range: (2 - 200)">
                                 <div class="input-group-append">
@@ -100,7 +104,7 @@
                             <span asp-validation-for="Weight" class="text-danger"></span>
                         </div>
                         <div class="form-group col-3 mb-2">
-                            <label asp-for="Diameter" class="control-label">Diameter</label>
+                            <label asp-for="Diameter" class="control-label required">Diameter</label>
                             <div class="input-group">
                                 <input asp-for="Diameter" class="form-control" type="number" value="@Model.Diameter" placeholder="Valid Range: (25 - 55)">
                                 <div class="input-group-append">
@@ -110,7 +114,7 @@
                             <span asp-validation-for="Diameter" class="text-danger"></span>
                         </div>
                         <div class="form-group col-3 mb-2">
-                            <label asp-for="Thickness" class="control-label">Thickness</label>
+                            <label asp-for="Thickness" class="control-label required">Thickness</label>
                             <div class="input-group">
                                 <input asp-for="Thickness" class="form-control" type="number" value="@Model.Thickness" placeholder="Valid Range: (2 - 20)">
                                 <div class="input-group-append">
@@ -120,7 +124,7 @@
                             <span asp-validation-for="Thickness" class="text-danger"></span>
                         </div>
                         <div class="form-group col-3 mb-2">
-                            <label asp-for="Height" class="control-label">Height</label>
+                            <label asp-for="Height" class="control-label required">Height</label>
                             <div class="input-group">
                                 <input asp-for="Height" class="form-control" type="number" value="@Model.Height" placeholder="Valid Range: (25 - 55)">
                                 <div class="input-group-append">
@@ -135,12 +139,12 @@
 
                     <h4 class="mt-2">Materials</h4>
                     <div class="form-group mb-2">
-                        <label asp-for="CaseMaterial" class="control-label">Case Material</label>
+                        <label asp-for="CaseMaterial" class="control-label required">Case Material</label>
                         <input asp-for="CaseMaterial" class="form-control" type="text" value="@Model.CaseMaterial" placeholder="">
                         <span asp-validation-for="CaseMaterial" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-2">
-                        <label asp-for="StrapMaterial" class="control-label">Strap Material</label>
+                        <label asp-for="StrapMaterial" class="control-label required">Strap Material</label>
                         <input asp-for="StrapMaterial" class="form-control" type="text" value="@Model.StrapMaterial" placeholder="">
                         <span asp-validation-for="StrapMaterial" class="text-danger"></span>
                     </div>
@@ -150,12 +154,12 @@
                     <h4 class="mt-2">Description</h4>
 
                     <div class="form-group mb-2">
-                        <label asp-for="ShortDescription" class="control-label">Short Description</label>
+                        <label asp-for="ShortDescription" class="control-label required">Short Description</label>
                         <input asp-for="ShortDescription" class="form-control" type="text" value="@Model.ShortDescription" placeholder="">
                         <span asp-validation-for="ShortDescription" class="text-danger"></span>
                     </div>
                     <div class="form-group mb-4">
-                        <label asp-for="FullDescription" class="control-label">Full Description</label>
+                        <label asp-for="FullDescription" class="control-label required">Full Description</label>
                         <textarea asp-for="FullDescription" class="form-control" id="fullDescription" value="@Model.FullDescription" rows="4"></textarea>
                         <span asp-validation-for="FullDescription" class="text-danger"></span>
                     </div>

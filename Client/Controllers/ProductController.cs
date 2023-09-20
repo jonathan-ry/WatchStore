@@ -1,19 +1,18 @@
-﻿//using Client.Models;
+﻿using AutoMapper;
 using Client.Interfaces;
+using Client.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Client.Controllers
 {
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
         private readonly IApiService _apiService;
 
-        public HomeController(ILogger<HomeController> logger, IApiService apiService)
+        public ProductController(IApiService apiService, IMapper mapper)
         {
             _apiService = apiService;
         }
-
         public async Task<IActionResult> Index()
         {
             var watches = await _apiService.GetWatchListAsync();
@@ -21,9 +20,10 @@ namespace Client.Controllers
             return View(watchList);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Detail(int productId)
         {
-            return View();
+            var watch = await _apiService.GetWatchByIdAsync(productId);
+            return View(watch);
         }
 
     }
