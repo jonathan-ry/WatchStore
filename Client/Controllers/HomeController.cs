@@ -16,9 +16,16 @@ namespace Client.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var watches = await _apiService.GetWatchListAsync();
-            var watchList = watches.ToList();
-            return View(watchList);
+            try
+            {
+                var watches = await _apiService.GetWatchListAsync();
+                var watchList = watches.ToList();
+                return View(watchList);
+            }
+            catch(Exception ex)
+            {
+                return View("_Error", ex);
+            }
         }
 
         public IActionResult Privacy()
