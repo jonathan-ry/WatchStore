@@ -1,16 +1,4 @@
-﻿//Show Create Modal
-$(function () {
-    var DashboardElement = $('#DashboardDiv');
-    $('button[data-toggle="ajax-modal"]').click(function (event) {
-        var url = $(this).data('url');
-        $.get(url).done(function (data) {
-            DashboardElement.html(data);
-            DashboardElement.find('.modal').modal('show');
-        })
-    })
-});
-
-//Create
+﻿//Create
 function create() {
     window.location.href = 'Dashboard/Create';
 }
@@ -52,26 +40,6 @@ function deleteItem(itemId) {
     });
 }
 
-
-//Update Modal Show
-function updateWatch(itemId) {
-    // Send AJAX request to update the item by itemId
-    $.ajax({
-        url: 'Dashboard/Update',
-        type: 'POST',
-        data: { itemId: itemId },
-        success: function (result) {
-            console.log("Here");
-            console.log(result);
-            // Handle success or update the UI
-            // You might refresh the list or do other actions
-        },
-        error: function () {
-            // Handle error
-        }
-    });
-}
-
 //Submit Form from Update Modal
 function updateFormSubmit() {
     $('#updateForm').submit();
@@ -102,7 +70,6 @@ function getFile(input) {
             $('#upload-icon').empty(); // Clear previous image if any
             $('#upload-icon').attr('src', e.target.result);
         };
-
 
         reader.readAsDataURL(file);
     }

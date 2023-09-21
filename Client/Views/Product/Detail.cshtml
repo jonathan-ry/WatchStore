@@ -3,7 +3,14 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-5">
-            <img src="@Model.PhotoUri" class="img-fluid" alt="@Model.Name" width="400px">
+            @if (Model.PhotoUri != null)
+            {
+                <img src="@Model.PhotoUri" class="img-fluid" alt="@Model.Name" width="400px">
+            }
+            else
+            {
+                <img src="/img/no-image.png" class="img-fluid mb-4" alt="@Model.Name" width="300px">
+            }
         </div>
         <div class="col-md-7">
             <h2>@Model.Name</h2>
