@@ -1,0 +1,150 @@
+﻿@model DashboardViewModel
+
+@{
+    var sortOption = Model.SortValue;
+    bool isSuccess = false;
+
+    if (TempData["IsSuccess"] != null && TempData["IsSuccess"] is bool)
+    {
+        isSuccess = (bool)TempData["IsSuccess"];
+    }
+
+    bool isCreate = false;
+
+    if (TempData["IsCreate"] != null && TempData["IsCreate"] is bool)
+    {
+        isCreate = (bool)TempData["IsCreate"];
+    }
+}
+
+<div class="container">
+    <h2 class="text-center m-4">
+        WATCH DASHBOARD
+    </h2>
+
+    @if (isSuccess && isCreate)
+    {
+        <div class="alert alert-success" role="alert">
+            Successfully created new record!
+            <button type="button" class="close float-end" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="row mt-2 mb-1">
+        <div class="col-6">
+            <button type="button" class="btn btn-primary me-2" onclick="location.href='@Url.Action("Create", "Dashboard")'">
+                New Watches
+            </button>
+        </div>
+
+        <div class="col-6">
+            <div class="float-end">
+                <!-- Sorting Dropdown -->
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select" onchange="sort(this.value)">
+                    <option value="newest">Newest</option>
+                    <option value="name">Name</option>
+                    <option value="priceLow">Price Low-High</option>
+                    <option value="priceHigh">Price High-Low</option>
+                </select>
+            </div>
+        </div>
+
+    </div>   
+
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Item No.</th>
+                    <th>Short Description</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var watch in Model.Watches)
+                {
+                    <tr>
+                        <td>
+                            @if (watch.PhotoUri != null)
+                            {
+                                <img id="table-image" src="@watch.PhotoUri" alt="@watch.Name">
+                            }
+                            else
+                            {
+                                <img id="table-image" src="/img/no-image.png" alt="@watch.Name">
+                            }
+                        </td>
+                        <td><a class="custom-link" href="@Url.Action("Detail", "Product", new { productId = watch.Id })">@watch.Name</a></td>
+                        <td>@watch.ItemNumber</td>
+                        <td>@watch.ShortDescription</td>
+                        @{
+                            // Get the price from your ASP.NET model (replace Model.Price with your actual property)
+                            double price = @watch.Price;
+
+                            // Format the price with two decimal places, a comma as a thousands separator, and no currency symbol
+                            string formattedPrice = price.ToString("N2", new System.Globalization.CultureInfo("en-US"));
+                        }
+
+                        <td>฿@formattedPrice</td>
+                        <td>
+                            <a class="btn btn-info btn-sm" href="@Url.Action("Update", "Dashboard", new { itemId = watch.Id })">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" onclick="showDeleteModal(@watch.Id)">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="float-end">
+                <!-- Number of Results -->
+                <p><strong>Number of Results:</strong> <span id="result-count">@Model.Watches.Count()</span></p>
+            </div>
+
+        </div>  
+    </div>
+    
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Delete Watch</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function myFunction() {
+            $("#sort-select option[value='@sortOption']").attr("selected", "selected");
+        }
+
+        myFunction();
+    </script>
+}

@@ -1,6 +1,7 @@
 ﻿using API.DTO;
 using API.Interfaces;
 using Azure.Storage.Blobs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Services
 {
@@ -17,18 +18,22 @@ namespace API.Services
             _filesContainer = blobServiceClient.GetBlobContainerClient("photocontainer");
         }
 
-        public async Task<BlobResponseDTO> UploadAsync(IFormFile blob)
+        public async Task<BlobResponseDTO> UploadAsync([FromBody] PhotoDTO model)
         {
+            byte[] binaryData = Convert.FromBase64String(model.Base64Data);
+
             BlobResponseDTO response = new();
 
             string uniqueId = Guid.NewGuid().ToString();
-            var ImageFileName = uniqueId + blob.FileName;
+
+            var ImageFileName = uniqueId + model.FileName;
 
             BlobClient client = _filesContainer.GetBlobClient(ImageFileName);
 
-            await using (Stream data = blob.OpenReadStream())
+            // Upload the binary data to Azure Blob Storage
+            using (var stream = new MemoryStream(binaryData))
             {
-                await client.UploadAsync(data);
+                await client.UploadAsync(stream, true);
             }
 
             response.Status = $"File {ImageFileName} Uploaded Successfully";

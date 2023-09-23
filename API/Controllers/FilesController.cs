@@ -14,10 +14,13 @@ namespace API.Controllers
         }
 
         [HttpPost("upload-file")]
-        public async Task<BlobResponseDTO> UploadPhoto(IFormFile file)
+        public async Task<ActionResult<BlobResponseDTO>> UploadPhoto(PhotoDTO photo)
         {
-            BlobResponseDTO result = await _fileService.UploadAsync(file);
-            return result;
+            BlobResponseDTO result = await _fileService.UploadAsync(photo);
+
+            if (!String.IsNullOrEmpty(result.Blob.Uri)) return Ok(result);
+
+            return BadRequest("Error in uploading photo");
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WatchViewModel>
+
+<div class="container">
+    <div class="m-4 text-center">
+        <h2><span id="title-span">DISCOVER</span> THE COLLECTIONS</h2>
+    </div>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <a class="card custom-card" href="@Url.Action("Detail", "Product", new { productId = item.Id })">
+                    @if(@item.PhotoUri != null)
+                    {
+                        <img src="@item.PhotoUri" class="card-img-top" alt="@item.Name">
+                    }
+                    else
+                    {
+                        <img src="/img/no-image.png" class="card-img-top" alt="@item.Name">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.ShortDescription</p>
+                        @{
+                            // Get the price from your ASP.NET model (replace Model.Price with your actual property)
+                            double price = @item.Price;
+
+                            // Format the price with two decimal places, a comma as a thousands separator, and no currency symbol
+                            string formattedPrice = price.ToString("N2", new System.Globalization.CultureInfo("en-US"));
+                        }
+                        <h6 class="card-text">฿@formattedPrice</h6>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

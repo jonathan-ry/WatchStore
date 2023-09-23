@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WatchViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <!-- Carousel -->
+    <div id="homeCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a class="carousel-link" asp-area="" asp-controller="Product" asp-action="Index">
+                    <img src="/img/banner-web-20.webp" class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a class="carousel-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
+                    <img src="/img/banner-web-10.webp" class="d-block w-100" alt="...">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Deck in Home Page-->
+    <div class="container">
+        <h2 class="mb-4 text-center"><span id="title-span">FEATURED</span> WATCHES</h2>
+    <div class="row">
+        @foreach (var item in Model.Take(4)) 
+        {
+            <div class="col-md-3 mb-4">  <!-- Adjust the column size for 4 items per row -->
+                <a class="card custom-card"  href="@Url.Action("Detail", "Product", new { productId = item.Id })">
+
+                        @if(@item.PhotoUri != null)
+                        {
+                            <img src="@item.PhotoUri" class="card-img-top" alt="@item.Name">
+                        }
+                        else
+                        {
+                            <img src="/img/no-image.png" class="card-img-top" alt="@item.Name">
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.ShortDescription</p>
+                            @{
+                                // Get the price from your ASP.NET model (replace Model.Price with your actual property)
+                                double price = @item.Price;
+
+                                // Format the price with two decimal places, a comma as a thousands separator, and no currency symbol
+                                string formattedPrice = price.ToString("N2", new System.Globalization.CultureInfo("en-US"));
+                            }
+                            <h6 class="card-text">฿@formattedPrice</h6>
+                        </div>
+                </a>
+            </div>
+        }
+    </div>
+    </div>
+</div>
