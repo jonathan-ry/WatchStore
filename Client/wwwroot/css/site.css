@@ -214,3 +214,23 @@ a.card:hover {
 #title-span {
     color: #ffc62d;
 }
+
+#container {
+    position: relative;
+    width: 100%;
+}
+
+#img-banner {
+    width: 100%;
+    height: auto;
+}
+
+#title-banner {
+    position: absolute;
+    top: 50%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    color: white;
+    transform: translate(-50%, -50%);
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 5px; /* Add rounded corners */
+}

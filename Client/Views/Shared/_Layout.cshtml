@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Watch Store</title>
+    <title>Watch Zone</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon1.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Client.styles.css" asp-append-version="true" />
@@ -32,6 +33,7 @@
                         <div class="navbar-nav">
                             <a class="nav-link font-weight-bold text-light mr-4" asp-area="" asp-controller="Product" asp-action="Index">Watches</a>
                             <a class="nav-link font-weight-bold text-light" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            <a class="nav-link font-weight-bold text-light" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +50,7 @@
     <footer class="border-top footer text-muted">
         <div class="container-fluid">
             <div class="container">
-                &copy; 2023 - WatchCatalog
+                &copy; 2023 - Watch Zone - <a class="mt-2" href="@Url.Action("About", "Home")">About Us</a>
             </div>
         </div>
     </footer>

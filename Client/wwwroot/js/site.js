@@ -5,13 +5,12 @@ function create() {
 
 //Submit Form from Create Modal
 function createFormSubmit() {
-    console.log("Here in add");
     $('#createForm').submit();
 }
 
 var itemIdToDelete;
 //Delete Modal Show
-function showDeleteModal(itemNumber) {
+function showDeleteModal(itemNumber, url) {
     itemIdToDelete = itemNumber;
     $("#deleteModal").modal('show');
 }
@@ -24,8 +23,14 @@ function confirmDelete() {
 
 function deleteItem(itemId) {
     // Send AJAX request to delete item by itemId
+    const windowUrlPattern = href => {
+        const url = new URL(href);
+        return url.origin
+    }
+    const route = windowUrlPattern(window.location.href) + '/Dashboard/DeleteItem';
+
     $.ajax({
-        url: 'Dashboard/DeleteItem',
+        url: route,
         type: 'POST',
         data: { itemId: itemId },
         success: function (result) {
