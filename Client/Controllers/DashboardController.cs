@@ -58,6 +58,7 @@ namespace Client.Controllers
             return View("Create", watch);
         }
 
+        [HttpPost]
         public async Task<ActionResult<WatchViewModel>> AddProduct(CreateViewModel item)
         {
             TempData["IsCreate"] = true;
